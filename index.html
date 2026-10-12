@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SecurePass — Privacy-first Password Generator</title>
+<meta name="description" content="Generate strong passwords locally in your browser using the Web Crypto API. No backend, no tracking.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="#top" aria-label="SecurePass home">
+    <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><path d="M16 2 4 7v8c0 7.5 5 13 12 15 7-2 12-7.5 12-15V7z" fill="none" stroke="url(#g)" stroke-width="2.5" stroke-linejoin="round"/><rect x="11" y="14" width="10" height="8" rx="2" fill="url(#g)"/><path d="M13 14v-2a3 3 0 0 1 6 0v2" fill="none" stroke="url(#g)" stroke-width="2"/></svg>
+    <span>Secure<b>Pass</b></span>
+  </a>
+  <div class="nav-right">
+    <span class="pill"><span class="dot" aria-hidden="true"></span>Local-only</span>
+    <a class="link" href="https://github.com/yogendra-08/securepass" target="_blank" rel="noopener noreferrer">GitHub</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <h1>Your security starts with a <span class="grad">stronger password.</span></h1>
+    <p>Generate random passwords with your browser's cryptographic engine. Everything happens on your device — nothing is sent, stored, or tracked.</p>
+  </section>
+
+  <section class="card" aria-labelledby="gen-title">
+    <h2 id="gen-title" class="sr-only">Password generator</h2>
+    <div class="display">
+      <input id="password" type="password" readonly aria-label="Generated password" placeholder="Click Generate" autocomplete="off" spellcheck="false">
+      <button id="toggle" class="icon-btn" type="button" aria-pressed="false" aria-label="Show password">Show</button>
+      <button id="copy" class="icon-btn" type="button" aria-label="Copy password">Copy</button>
+    </div>
+
+    <div class="row">
+      <label for="length">Length</label>
+      <output id="lengthOut" for="length" class="len">20</output>
+    </div>
+    <input id="length" type="range" min="8" max="64" value="20" aria-describedby="lengthHelp">
+    <p id="lengthHelp" class="hint">Choose 8–64 characters. Longer is generally better.</p>
+
+    <fieldset class="opts">
+      <legend>Character sets</legend>
+      <label class="opt"><input type="checkbox" id="upper" checked><span>Uppercase <code>A-Z</code></span></label>
+      <label class="opt"><input type="checkbox" id="lower" checked><span>Lowercase <code>a-z</code></span></label>
+      <label class="opt"><input type="checkbox" id="numbers" checked><span>Numbers <code>0-9</code></span></label>
+      <label class="opt"><input type="checkbox" id="symbols" checked><span>Symbols <code>!@#$%^&amp;*</code></span></label>
+    </fieldset>
+
+    <p id="error" class="error" role="alert" hidden></p>
+    <button id="generate" class="primary" type="button">Generate new password</button>
+  </section>
+
+  <section class="card" aria-labelledby="str-title">
+    <h2 id="str-title">Strength estimate</h2>
+    <div class="meter" role="meter" id="meter" aria-label="Estimated password strength" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" aria-valuetext="No password yet">
+      <i></i><i></i><i></i><i></i>
+    </div>
+    <p class="strength-label" id="strengthLabel">No password yet</p>
+    <dl class="info">
+      <div><dt>Characters</dt><dd id="infoLen">—</dd></div>
+      <div><dt>Categories</dt><dd id="infoCats">—</dd></div>
+      <div><dt>Est. entropy</dt><dd id="infoBits">—</dd></div>
+    </dl>
+    <p class="hint">This is an approximation based on length and character pool size. It is not a guarantee of security and does not test against real-world attacks.</p>
+  </section>
+
+  <section class="card edu" aria-labelledby="edu-title">
+    <h2 id="edu-title">Good password habits</h2>
+    <ul>
+      <li><b>Use a unique password for every account.</b> Reuse lets one breach unlock many accounts.</li>
+      <li><b>Never reuse a generated password.</b> Generate a fresh one each time.</li>
+      <li><b>Use a reputable password manager</b> to store them, so you don't need to memorize each one.</li>
+      <li><b>Enable multi-factor authentication</b> where available.</li>
+      <li><b>No server involved.</b> Passwords are generated in your browser and never transmitted.</li>
+    </ul>
+  </section>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<footer class="footer">
+  <span>Secure<b>Pass</b> — open source, privacy-first.</span>
+  <a class="link" href="https://github.com/yogendra-08/securepass" target="_blank" rel="noopener noreferrer">github.com/yogendra-08/securepass</a>
+  <span>Released under the MIT License.</span>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
